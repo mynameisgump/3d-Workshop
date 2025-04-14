@@ -1,8 +1,23 @@
-import { Box, Text3D, OrbitControls, Center, Float } from "@react-three/drei";
+import { Box, Text3D, Float } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
+import { useRef } from "react";
+import { Group, Mesh, Vector3 } from "three";
+const POS_OFFSET = new Vector3(-1.5, 0.7, 0);
 
-const Slide1 = () => {
+type SlideProps = {
+  position: Vector3;
+};
+const Slide1 = ({ position }: SlideProps) => {
+  const boxRef = useRef<Mesh>(null);
+
+  useFrame(() => {
+    if (boxRef.current) {
+      boxRef.current.rotation.y += 0.01;
+    }
+  });
+
   return (
-    <group position={[-2.8, 1, 0]}>
+    <group position={position.add(POS_OFFSET)}>
       <Float
         scale={[0.25, 0.25, 0.25]}
         position={[-0.5, 0, 0]}
@@ -32,7 +47,7 @@ const Slide1 = () => {
           <meshStandardMaterial side={2} />
         </Text3D>
       </Float>
-      <Box position={[5, -2, 0]} rotation={[0, 0, 0]} />
+      <Box ref={boxRef} position={[5, -2, 0]} rotation={[0, 0, 0]} castShadow />
     </group>
   );
 };
