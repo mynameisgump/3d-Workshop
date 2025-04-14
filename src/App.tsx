@@ -1,24 +1,39 @@
 import { Canvas } from "@react-three/fiber";
 import { Vector3 } from "three";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Environment, Backdrop, OrbitControls } from "@react-three/drei";
 import UserControls from "./UserControls";
 import Slide1 from "./Slide1";
 import { degToRad } from "three/src/math/MathUtils.js";
+import { slideShowIndex } from "./atoms/atoms";
+import { useAtom } from "jotai";
 
-const slides = [1, 2, 3];
+// const slides = [1, 2, 3];
+// const slides = [
+//   (<Slide1 position={[0,0,0]}></Slide1>),
+//   (<Slide1 position={[0,0,0]}></Slide1>),
+// ]
+const slides = ["slide1", "slide1"];
 
 const ThreeApp = () => {
-  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  // const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  const [slideIndex, setSlideIndex] = useAtom(slideShowIndex);
+
+  const slideComponents = useMemo(() => {
+    return slides.map((slide, index) => {
+      const position = new Vector3(index * 10, 0, 0);
+      return <Slide1 key={index} index={index} position={position} />;
+    });
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "ArrowRight") {
-        setCurrentSlideIndex((prevIndex) =>
+        setSlideIndex((prevIndex) =>
           Math.min(prevIndex + 1, slides.length - 1)
         );
       } else if (event.key === "ArrowLeft") {
-        setCurrentSlideIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+        setSlideIndex((prevIndex) => Math.max(prevIndex - 1, 0));
       }
     };
     window.addEventListener("keydown", handleKeyDown);
@@ -38,8 +53,7 @@ const ThreeApp = () => {
       />
 
       <Environment preset="city" />
-      <Slide1 position={new Vector3(0, 0, 0)}></Slide1>
-      {/* <OrbitControls /> */}
+      {slideComponents}
       <Backdrop
         floor={10}
         segments={20}

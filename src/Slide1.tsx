@@ -1,23 +1,35 @@
 import { Box, Text3D, Float } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
-import { Group, Mesh, Vector3 } from "three";
+import { Mesh, Vector3 } from "three";
+import { slideShowIndex } from "./atoms/atoms";
+import { useAtom } from "jotai";
 const POS_OFFSET = new Vector3(-1.5, 0.7, 0);
 
 type SlideProps = {
   position: Vector3;
+  index: number;
 };
-const Slide1 = ({ position }: SlideProps) => {
+const Slide1 = ({ position, index }: SlideProps) => {
   const boxRef = useRef<Mesh>(null);
+  const groupRef = useRef<Mesh>(null);
+  const [slideIndex] = useAtom(slideShowIndex);
 
   useFrame(() => {
     if (boxRef.current) {
       boxRef.current.rotation.y += 0.01;
     }
+    if (groupRef.current) {
+      const newPosition = (index - slideIndex) * 10;
+      groupRef.current.position.lerp(
+        new Vector3(newPosition, position.y, position.z).add(POS_OFFSET),
+        0.1
+      );
+    }
   });
 
   return (
-    <group position={position.add(POS_OFFSET)}>
+    <group ref={groupRef} position={position}>
       <Float
         scale={[0.25, 0.25, 0.25]}
         position={[-0.5, 0, 0]}
