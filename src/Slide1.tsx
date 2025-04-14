@@ -2,7 +2,7 @@ import { Box, Text3D, OrbitControls, Center, Float } from "@react-three/drei";
 
 const Slide1 = () => {
   return (
-    <group position={[-2.8, 3, 0]}>
+    <group position={[-2.8, 1, 0]}>
       <Float
         scale={[0.25, 0.25, 0.25]}
         position={[-0.5, 0, 0]}
@@ -11,12 +11,6 @@ const Slide1 = () => {
         <Text3D
           font={"/public/JetBrains Mono_Regular.json"}
           bevelEnabled
-          bevelSize={0.04}
-          bevelThickness={0.1}
-          height={0.5}
-          lineHeight={1}
-          letterSpacing={-0.06}
-          size={1.5}
           castShadow
         >
           {"An Introduction to Web3D"}
@@ -32,12 +26,6 @@ const Slide1 = () => {
         <Text3D
           font={"/public/JetBrains Mono_Regular.json"}
           bevelEnabled
-          bevelSize={0.04}
-          bevelThickness={0.1}
-          height={0.5}
-          lineHeight={1}
-          letterSpacing={-0.06}
-          size={1.5}
           castShadow
         >
           {"with Ethan Crann"}

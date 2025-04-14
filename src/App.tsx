@@ -1,11 +1,12 @@
 import { Canvas } from "@react-three/fiber";
-import { Environment, Backdrop } from "@react-three/drei";
+import { Environment, Backdrop, OrbitControls } from "@react-three/drei";
 import UserControls from "./UserControls";
 import Slide1 from "./Slide1";
+import { degToRad } from "three/src/math/MathUtils.js";
 
 function App() {
   return (
-    <Canvas shadows camera={{ position: [0, 10, 30], fov: 15 }}>
+    <Canvas shadows camera={{ position: [0, 0, 5] }}>
       <ambientLight intensity={Math.PI / 2} />
       <directionalLight
         position={[0, 10, 0]}
@@ -28,6 +29,7 @@ function App() {
       >
         <meshStandardMaterial color="#353540" />
       </Backdrop>
+      {/* <OrbitControls /> */}
       {/* <UserControls /> */}
     </Canvas>
   );
