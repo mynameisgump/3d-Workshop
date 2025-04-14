@@ -2,8 +2,7 @@ import { Box, Text3D, OrbitControls, Center, Float } from "@react-three/drei";
 
 const Slide1 = () => {
   return (
-    // <Center top>
-    <group position={[-2.8, 2, 0]}>
+    <group position={[-2.8, 3, 0]}>
       <Float
         scale={[0.25, 0.25, 0.25]}
         position={[-0.5, 0, 0]}
@@ -47,7 +46,6 @@ const Slide1 = () => {
       </Float>
       <Box position={[5, -2, 0]} rotation={[0, 0, 0]} />
     </group>
-    // </Center>
   );
 };
 

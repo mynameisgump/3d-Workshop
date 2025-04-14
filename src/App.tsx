@@ -28,7 +28,6 @@ function App() {
       >
         <meshStandardMaterial color="#353540" />
       </Backdrop>
-      {/* <OrbitControls /> */}
       {/* <UserControls /> */}
     </Canvas>
   );
