@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import { Mesh, Vector3 } from "three";
-import { slideShowIndex } from "./atoms/atoms";
+import { slideShowIndex } from "../atoms/atoms";
 import { useAtom } from "jotai";
 
 const POS_OFFSET = new Vector3(-2, 0.7, 0);
@@ -13,7 +13,7 @@ type SlideProps = {
   index: number;
 };
 
-const Slide1 = ({ position, index }: SlideProps) => {
+const Slide3 = ({ position, index }: SlideProps) => {
   const boxRef = useRef<Mesh>(null);
   const groupRef = useRef<Mesh>(null);
   const [slideIndex] = useAtom(slideShowIndex);
@@ -21,7 +21,6 @@ const Slide1 = ({ position, index }: SlideProps) => {
     () => position.clone().add(POS_OFFSET),
     [position]
   );
-  //   console.log(groupPosition);
 
   useFrame(() => {
     if (boxRef.current) {
@@ -29,7 +28,6 @@ const Slide1 = ({ position, index }: SlideProps) => {
     }
     if (groupRef.current) {
       const newPosition = (index - slideIndex) * 10;
-      //   console.log(groupRef.current.position, groupPosition);
       groupRef.current.position.lerp(
         new Vector3(
           newPosition + POS_OFFSET.x,
@@ -77,4 +75,4 @@ const Slide1 = ({ position, index }: SlideProps) => {
   );
 };
 
-export default Slide1;
+export default Slide3;

@@ -3,7 +3,7 @@ import { Vector3 } from "three";
 import { useState, useEffect, useMemo } from "react";
 import { Environment, Backdrop, OrbitControls } from "@react-three/drei";
 import UserControls from "./UserControls";
-import Slide1 from "./Slide1";
+import Slide1 from "./slides/Slide1";
 import Slide2 from "./slides/Slide2";
 import { degToRad } from "three/src/math/MathUtils.js";
 import { slideShowIndex } from "./atoms/atoms";
