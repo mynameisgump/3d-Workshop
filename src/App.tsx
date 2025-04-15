@@ -1,24 +1,36 @@
 import { Canvas } from "@react-three/fiber";
 import { Vector3 } from "three";
-import { useState, useEffect, useMemo } from "react";
-import { Environment, Backdrop, OrbitControls } from "@react-three/drei";
+import { useState, useEffect, useMemo, useRef } from "react";
+import {
+  Environment,
+  Backdrop,
+  OrbitControls,
+  CameraControls,
+} from "@react-three/drei";
 import UserControls from "./UserControls";
 import Slide1 from "./slides/Slide1";
 import Slide2 from "./slides/Slide2";
 import Slide3 from "./slides/Slide3";
+import WebGlSlide from "./slides/WebGLSlide";
 import TextSlide from "./slides/TextSlide";
 import { degToRad } from "three/src/math/MathUtils.js";
 import { slideShowIndex } from "./atoms/atoms";
 import { useAtom } from "jotai";
 import DollsSlide from "./slides/DollsSlide";
+import TestControls from "./TestControls";
 
 const slides = [
   "slide1",
   "slide2",
-  "What exactly is Web3D?",
   "Dolls",
-  "Web 3d Use Cases",
+  "WebGlSlide",
   "Structure of a Scene",
+  "Meshes",
+  "Materials",
+  "Lights",
+  "Cameras",
+  "Your first Scene",
+  "Shaders",
   "VR and AR",
 ];
 
@@ -37,6 +49,11 @@ const ThreeApp = () => {
       if (slide == "Dolls") {
         return (
           <DollsSlide key={index} index={index} position={initialPosition} />
+        );
+      }
+      if (slide == "WebGlSlide") {
+        return (
+          <WebGlSlide key={index} index={index} position={initialPosition} />
         );
       } else {
         return (
@@ -78,7 +95,7 @@ const ThreeApp = () => {
       />
 
       <Environment preset="city" />
-      <OrbitControls />
+      {/* <OrbitControls /> */}
       {slideComponents}
       <Backdrop
         floor={10}
@@ -90,6 +107,8 @@ const ThreeApp = () => {
         <meshStandardMaterial color="#353540" />
       </Backdrop>
       <UserControls></UserControls>
+      {/* <CameraControls></CameraControls> */}
+      {/* <TestControls></TestControls> */}
     </>
   );
 };

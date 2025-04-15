@@ -1,5 +1,4 @@
 import { useRef, useEffect } from "react";
-import { CameraControls } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
@@ -13,8 +12,6 @@ interface PlayerControllerProps {
 const UserControls = ({
   initialRotation = [0, 0, 0],
 }: PlayerControllerProps) => {
-  const controlsRef = useRef<CameraControls | null>(null);
-
   const targetMouseRotationRef = useRef<THREE.Vector2>(new THREE.Vector2(0, 0));
 
   const currentMouseRotationRef = useRef<THREE.Vector2>(
@@ -34,50 +31,32 @@ const UserControls = ({
   }, [initialRotation]);
 
   useFrame((state) => {
-    if (controlsRef.current) {
-      const mouseX = state.pointer.x;
-      const mouseY = state.pointer.y;
+    const mouseX = state.pointer.x;
+    const mouseY = state.pointer.y;
 
-      targetMouseRotationRef.current.x = -mouseX * MOUSE_SENSITIVITY_X;
-      targetMouseRotationRef.current.y = mouseY * MOUSE_SENSITIVITY_Y;
+    targetMouseRotationRef.current.x = -mouseX * MOUSE_SENSITIVITY_X;
+    targetMouseRotationRef.current.y = mouseY * MOUSE_SENSITIVITY_Y;
 
-      currentMouseRotationRef.current.x = THREE.MathUtils.lerp(
-        currentMouseRotationRef.current.x,
-        targetMouseRotationRef.current.x,
-        LERP_FACTOR
-      );
-      currentMouseRotationRef.current.y = THREE.MathUtils.lerp(
-        currentMouseRotationRef.current.y,
-        targetMouseRotationRef.current.y,
-        LERP_FACTOR
-      );
+    currentMouseRotationRef.current.x = THREE.MathUtils.lerp(
+      currentMouseRotationRef.current.x,
+      targetMouseRotationRef.current.x,
+      LERP_FACTOR
+    );
+    currentMouseRotationRef.current.y = THREE.MathUtils.lerp(
+      currentMouseRotationRef.current.y,
+      targetMouseRotationRef.current.y,
+      LERP_FACTOR
+    );
 
-      const camera = controlsRef.current.camera;
+    const camera = state.camera;
 
-      camera.rotation.copy(initialRotationRef.current);
+    camera.rotation.copy(initialRotationRef.current);
 
-      camera.rotateY(currentMouseRotationRef.current.x);
-      camera.rotateX(currentMouseRotationRef.current.y);
-    }
+    camera.rotateY(currentMouseRotationRef.current.x);
+    camera.rotateX(currentMouseRotationRef.current.y);
   });
 
-  useEffect(() => {
-    if (controlsRef.current) {
-      controlsRef.current.azimuthRotateSpeed = 0;
-      controlsRef.current.polarRotateSpeed = 0;
-
-      controlsRef.current.camera.rotation.set(
-        initialRotation[0],
-        initialRotation[1],
-        initialRotation[2],
-        "YXZ"
-      );
-
-      controlsRef.current.update(0);
-    }
-  }, [initialRotation]);
-
-  return <CameraControls ref={controlsRef} />;
+  return <></>;
 };
 
 export default UserControls;
