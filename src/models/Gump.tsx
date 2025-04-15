@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, JSX } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { GLTF } from "three-stdlib";
@@ -22,7 +22,7 @@ type GLTFResult = GLTF & {
 
 const Gump = (props: JSX.IntrinsicElements["group"]) => {
   const groupRef = useRef<THREE.Group>(null);
-  const { nodes, materials } = useGLTF("/Gump.glb") as GLTFResult;
+  const { nodes, materials } = useGLTF("/Gump.glb") as unknown as GLTFResult;
 
   const [dummy] = useState(() => new THREE.Object3D());
   useFrame((state, dt) => {

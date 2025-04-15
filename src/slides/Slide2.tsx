@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { Float, Text3D } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
@@ -13,7 +13,7 @@ type SlideProps = {
   position: Vector3;
   index: number;
 };
-const Slide1 = ({ position, index }: SlideProps) => {
+const Slide1 = ({ position = new Vector3(0, 0, 0), index = 0 }: SlideProps) => {
   const groupRef = useRef<Mesh>(null);
   const [slideIndex] = useAtom(slideShowIndex);
   const groupPosition = useMemo(
@@ -46,7 +46,7 @@ const Slide1 = ({ position, index }: SlideProps) => {
         <Text3D
           font={"/public/JetBrains Mono_Regular.json"}
           bevelEnabled
-          castShadow
+          castShadow position={[-2.98541867373539, -2.98684199230617, -0.0449897886675091]}
         >
           {"My Background"}
           <meshStandardMaterial side={2} />
