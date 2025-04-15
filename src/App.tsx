@@ -5,11 +5,13 @@ import { Environment, Backdrop, OrbitControls } from "@react-three/drei";
 import UserControls from "./UserControls";
 import Slide1 from "./slides/Slide1";
 import Slide2 from "./slides/Slide2";
+import Slide3 from "./slides/Slide3";
+import TextSlide from "./slides/TextSlide";
 import { degToRad } from "three/src/math/MathUtils.js";
 import { slideShowIndex } from "./atoms/atoms";
 import { useAtom } from "jotai";
 
-const slides = ["slide1", "slide2"];
+const slides = ["slide1", "slide2", "What exactly is Web3D", ""];
 
 const ThreeApp = () => {
   const [slideIndex, setSlideIndex] = useAtom(slideShowIndex);
@@ -22,6 +24,15 @@ const ThreeApp = () => {
       }
       if (slide == "slide2") {
         return <Slide2 key={index} index={index} position={initialPosition} />;
+      } else {
+        return (
+          <TextSlide
+            key={index}
+            index={index}
+            position={initialPosition}
+            text={slide}
+          />
+        );
       }
     });
   }, []);

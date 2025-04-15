@@ -14,7 +14,7 @@ type SlideProps = {
   text: string;
 };
 
-const Slide3 = ({ position, index, text }: SlideProps) => {
+const TextSlide = ({ position, index, text }: SlideProps) => {
   const groupRef = useRef<Mesh>(null);
   const [slideIndex] = useAtom(slideShowIndex);
   const groupPosition = useMemo(
@@ -56,4 +56,4 @@ const Slide3 = ({ position, index, text }: SlideProps) => {
   );
 };
 
-export default Slide3;
+export default TextSlide;
