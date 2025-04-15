@@ -6,6 +6,8 @@ import { GLTF } from "three-stdlib";
 import { degToRad, lerp } from "three/src/math/MathUtils.js";
 import { easing } from "maath";
 import { Matrix4, Object3D, Quaternion, Vector3 } from "three";
+import frag from "../Shaders/psx.frag";
+import vert from "../Shaders/psx.vert";
 
 type GLTFResult = GLTF & {
   nodes: {

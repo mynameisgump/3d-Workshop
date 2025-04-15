@@ -17,7 +17,10 @@ const Slide1 = ({ position, index }: SlideProps) => {
   const boxRef = useRef<Mesh>(null);
   const groupRef = useRef<Mesh>(null);
   const [slideIndex] = useAtom(slideShowIndex);
-  const groupPosition = useMemo(() => position.add(POS_OFFSET), [position]);
+  const groupPosition = useMemo(
+    () => position.clone().add(POS_OFFSET),
+    [position]
+  );
   //   console.log(groupPosition);
 
   useFrame(() => {
