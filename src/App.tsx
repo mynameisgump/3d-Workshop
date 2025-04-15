@@ -4,25 +4,25 @@ import { useState, useEffect, useMemo } from "react";
 import { Environment, Backdrop, OrbitControls } from "@react-three/drei";
 import UserControls from "./UserControls";
 import Slide1 from "./Slide1";
+import Slide2 from "./slides/Slide2";
 import { degToRad } from "three/src/math/MathUtils.js";
 import { slideShowIndex } from "./atoms/atoms";
 import { useAtom } from "jotai";
 
-// const slides = [1, 2, 3];
-// const slides = [
-//   (<Slide1 position={[0,0,0]}></Slide1>),
-//   (<Slide1 position={[0,0,0]}></Slide1>),
-// ]
-const slides = ["slide1", "slide1"];
+const slides = ["slide1", "slide2"];
 
 const ThreeApp = () => {
-  // const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [slideIndex, setSlideIndex] = useAtom(slideShowIndex);
 
   const slideComponents = useMemo(() => {
     return slides.map((slide, index) => {
-      const position = new Vector3(index * 10, 0, 0);
-      return <Slide1 key={index} index={index} position={position} />;
+      const initialPosition = new Vector3(index * 10, 0, 0);
+      if (slide == "slide1") {
+        return <Slide1 key={index} index={index} position={initialPosition} />;
+      }
+      if (slide == "slide2") {
+        return <Slide2 key={index} index={index} position={initialPosition} />;
+      }
     });
   }, []);
 
@@ -53,6 +53,7 @@ const ThreeApp = () => {
       />
 
       <Environment preset="city" />
+      <OrbitControls />
       {slideComponents}
       <Backdrop
         floor={10}

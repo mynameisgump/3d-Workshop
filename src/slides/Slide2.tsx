@@ -1,10 +1,14 @@
-import { Box, Text3D, Float } from "@react-three/drei";
-import { useMemo } from "react";
+import { Box, Text3D, Float, Gltf, useGLTF } from "@react-three/drei";
+import { useEffect, useMemo } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import { Mesh, Vector3 } from "three";
-import { slideShowIndex } from "./atoms/atoms";
+import { slideShowIndex } from "../atoms/atoms";
 import { useAtom } from "jotai";
+import { degToRad } from "three/src/math/MathUtils.js";
+import Gump from "../models/Gump";
+import frag from "../Shaders/psx.frag";
+import vert from "../Shaders/psx.vert";
 
 const POS_OFFSET = new Vector3(-2, 0.7, 0);
 
@@ -12,18 +16,12 @@ type SlideProps = {
   position: Vector3;
   index: number;
 };
-
 const Slide1 = ({ position, index }: SlideProps) => {
-  const boxRef = useRef<Mesh>(null);
   const groupRef = useRef<Mesh>(null);
   const [slideIndex] = useAtom(slideShowIndex);
   const groupPosition = useMemo(() => position.add(POS_OFFSET), [position]);
-  //   console.log(groupPosition);
 
   useFrame(() => {
-    if (boxRef.current) {
-      boxRef.current.rotation.y += 0.01;
-    }
     if (groupRef.current) {
       const newPosition = (index - slideIndex) * 10;
       //   console.log(groupRef.current.position, groupPosition);
@@ -40,7 +38,7 @@ const Slide1 = ({ position, index }: SlideProps) => {
 
   return (
     <group ref={groupRef} position={groupPosition}>
-      <Float
+      {/* <Float
         scale={[0.25, 0.25, 0.25]}
         position={[-0.5, 0, 0]}
         floatingRange={[-0.05, 0.05]}
@@ -68,8 +66,14 @@ const Slide1 = ({ position, index }: SlideProps) => {
           {"with Ethan Crann"}
           <meshStandardMaterial side={2} />
         </Text3D>
-      </Float>
-      <Box ref={boxRef} position={[5, -2, 0]} rotation={[0, 0, 0]} castShadow />
+      </Float> */}
+      {/* <primitive
+        ref={meshRef}
+        object={scene}
+        scale={[6, 6, 6]}
+        rotation={[0, degToRad(-90), 0]}
+      /> */}
+      <Gump position={[2, -1, 0]} scale={[8, 8, 8]}></Gump>
     </group>
   );
 };
