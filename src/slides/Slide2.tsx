@@ -46,7 +46,8 @@ const Slide1 = ({ position = new Vector3(0, 0, 0), index = 0 }: SlideProps) => {
         <Text3D
           font={"/public/JetBrains Mono_Regular.json"}
           bevelEnabled
-          castShadow position={[-2.98541867373539, -2.98684199230617, -0.0449897886675091]}
+          castShadow
+          position={[-2.98541867373539, -2.98684199230617, -0.0449897886675091]}
         >
           {"My Background"}
           <meshStandardMaterial side={2} />
