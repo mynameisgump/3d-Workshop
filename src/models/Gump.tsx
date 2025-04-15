@@ -26,6 +26,7 @@ const Gump = (props: JSX.IntrinsicElements["group"]) => {
 
   const [dummy] = useState(() => new THREE.Object3D());
   useFrame((state, dt) => {
+    if (!groupRef.current) return;
     dummy.lookAt(state.pointer.x, state.pointer.y, 2);
     easing.dampQ(groupRef.current.quaternion, dummy.quaternion, 0.15, dt);
   });
