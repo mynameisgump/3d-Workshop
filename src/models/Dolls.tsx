@@ -7,6 +7,7 @@ import * as THREE from "three";
 import React, { JSX } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
+import { useFrame } from "@react-three/fiber";
 
 type ActionName = "Animation";
 
@@ -36,6 +37,7 @@ type GLTFResult = GLTF & {
 
 export function Dolls(props: JSX.IntrinsicElements["group"]) {
   const group = React.useRef<THREE.Group>();
+  const r3fDoll = React.useRef<THREE.Mesh>(null);
   const { nodes, materials, animations } = useGLTF("/Dolls.glb") as GLTFResult;
   const { actions } = useAnimations(animations, group);
   const stacked = React.useRef(true);
@@ -46,6 +48,24 @@ export function Dolls(props: JSX.IntrinsicElements["group"]) {
     actions.Animation.setLoop(THREE.LoopOnce, 1);
     actions.Animation.play();
   };
+  useFrame(({ clock }) => {
+    // if (group.current) {
+    //   group.current.rotation.y += 0.005;
+    // }
+    const t = clock.getElapsedTime();
+
+    // Sway left/right like bending knees
+    const sway = Math.sin(t * 2) * 0.3; // rotation
+    const bounce = Math.abs(Math.sin(t * 2)) * 0.1; // up/down
+
+    // if (r3fDoll.current) {
+    //   r3fDoll.current.rotation.z = sway; // leaning side to side
+    //   r3fDoll.current.position.y = 1.276 + bounce; // subtle up/down bounce
+    // }
+    if (stacked) {
+      group.current.rotation.x = sway;
+    }
+  });
 
   return (
     <group onClick={playUnstack} ref={group} {...props} dispose={null}>
@@ -57,6 +77,7 @@ export function Dolls(props: JSX.IntrinsicElements["group"]) {
           position={[0, 1.276, 0.607]}
           rotation={[0, 1.571, 0]}
           scale={0.094}
+          ref={r3fDoll}
         >
           <mesh
             name="r3fTop"

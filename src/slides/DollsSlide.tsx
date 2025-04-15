@@ -50,27 +50,17 @@ const DollsSlide = ({
           font={"/public/JetBrains Mono_Regular.json"}
           bevelEnabled
           castShadow
+          position={[3.69, 3.29554530728606, 0.484356707554348]}
         >
-          {"An Introduction to Web3D"}
+          {"What is Web3D?"}
           <meshStandardMaterial side={2} />
         </Text3D>
       </Float>
-      <Float
-        scale={[0.2, 0.2, 0.2]}
-        position={[-1, -1, 0]}
-        floatingRange={[-0.05, 0.05]}
-        rotationIntensity={0.1}
-      >
-        <Text3D
-          font={"/public/JetBrains Mono_Regular.json"}
-          bevelEnabled
-          castShadow
-        >
-          {"with Ethan Crann"}
-          <meshStandardMaterial side={2} />
-        </Text3D>
-        <Dolls position={[3.59774711820674, -8.28466848963668, 0.0787604520397187]} scale={[4.49, 4.49, 4.49]} rotation={[1.553187717344416, -1.5699491131148915, 1.5446160484538454]}></Dolls>
-      </Float>
+      <Dolls
+        position={[0.19, -2.58, 0.0787604520397187]}
+        scale={[0.78, 0.78, 0.78]}
+        rotation={[0, -1.5707963267948966, 0]}
+      ></Dolls>
     </group>
   );
 };
