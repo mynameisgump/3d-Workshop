@@ -1,10 +1,11 @@
-import { Box, Text3D, Float } from "@react-three/drei";
+import { Text3D, Float } from "@react-three/drei";
 import { useMemo } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import { Mesh, Vector3 } from "three";
 import { slideShowIndex } from "../atoms/atoms";
 import { useAtom } from "jotai";
+import { Dolls } from "../models/Dolls";
 
 const POS_OFFSET = new Vector3(-2, 0.7, 0);
 
@@ -13,23 +14,20 @@ type SlideProps = {
   index: number;
 };
 
-const Slide1 = ({ position = new Vector3(0, 0, 0), index = 0 }: SlideProps) => {
-  const boxRef = useRef<Mesh>(null);
+const DollsSlide = ({
+  position = new Vector3(0, 0, 0),
+  index = 0,
+}: SlideProps) => {
   const groupRef = useRef<Mesh>(null);
   const [slideIndex] = useAtom(slideShowIndex);
   const groupPosition = useMemo(
     () => position.clone().add(POS_OFFSET),
     [position]
   );
-  //   console.log(groupPosition);
 
   useFrame(() => {
-    if (boxRef.current) {
-      boxRef.current.rotation.y += 0.01;
-    }
     if (groupRef.current) {
       const newPosition = (index - slideIndex) * 10;
-      //   console.log(groupRef.current.position, groupPosition);
       groupRef.current.position.lerp(
         new Vector3(
           newPosition + POS_OFFSET.x,
@@ -71,10 +69,10 @@ const Slide1 = ({ position = new Vector3(0, 0, 0), index = 0 }: SlideProps) => {
           {"with Ethan Crann"}
           <meshStandardMaterial side={2} />
         </Text3D>
+        <Dolls position={[3.59774711820674, -8.28466848963668, 0.0787604520397187]} scale={[4.49, 4.49, 4.49]} rotation={[1.553187717344416, -1.5699491131148915, 1.5446160484538454]}></Dolls>
       </Float>
-      <Box ref={boxRef} position={[5, -2, 0]} rotation={[0, 0, 0]} castShadow />
     </group>
   );
 };
 
-export default Slide1;
+export default DollsSlide;

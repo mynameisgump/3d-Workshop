@@ -10,8 +10,17 @@ import TextSlide from "./slides/TextSlide";
 import { degToRad } from "three/src/math/MathUtils.js";
 import { slideShowIndex } from "./atoms/atoms";
 import { useAtom } from "jotai";
+import DollsSlide from "./slides/DollsSlide";
 
-const slides = ["slide1", "slide2", "What exactly is Web3D", ""];
+const slides = [
+  "slide1",
+  "slide2",
+  "What exactly is Web3D?",
+  "Dolls",
+  "Web 3d Use Cases",
+  "Structure of a Scene",
+  "VR and AR",
+];
 
 const ThreeApp = () => {
   const [slideIndex, setSlideIndex] = useAtom(slideShowIndex);
@@ -24,6 +33,11 @@ const ThreeApp = () => {
       }
       if (slide == "slide2") {
         return <Slide2 key={index} index={index} position={initialPosition} />;
+      }
+      if (slide == "Dolls") {
+        return (
+          <DollsSlide key={index} index={index} position={initialPosition} />
+        );
       } else {
         return (
           <TextSlide
@@ -75,6 +89,7 @@ const ThreeApp = () => {
       >
         <meshStandardMaterial color="#353540" />
       </Backdrop>
+      <UserControls></UserControls>
     </>
   );
 };
