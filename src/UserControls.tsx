@@ -26,13 +26,13 @@ const UserControls = ({
     const handleMouseMove = (event: MouseEvent) => {
       mousePostionRef.current.x = 2 * (event.clientX / window.innerWidth) - 1;
       mousePostionRef.current.y = 2 * (event.clientY / window.innerHeight) - 1;
-      console.log(mousePostionRef.current);
+      // console.log(mousePostionRef.current);
     };
 
-    document.body.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove);
 
     return () => {
-      document.body.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
 

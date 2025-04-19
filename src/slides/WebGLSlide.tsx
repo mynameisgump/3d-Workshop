@@ -1,10 +1,11 @@
-import { Box, Text3D, Float, Html, useBounds } from "@react-three/drei";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { Text3D, Float, Html, useBounds } from "@react-three/drei";
+import { useCallback, useMemo, useState } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import { Mesh, Vector3 } from "three";
 import { slideShowIndex } from "../atoms/atoms";
 import { useAtom } from "jotai";
+import Triangle from "../components/triangle";
 
 const POS_OFFSET = new Vector3(-2, 0.7, 0);
 
@@ -19,22 +20,20 @@ const WebGlSlide = ({
 }: SlideProps) => {
   const groupRef = useRef<Mesh>(null);
   const [slideIndex] = useAtom(slideShowIndex);
+  console.log("WebGLSlide", slideIndex, index);
   const [screenSelected, setScreenSelected] = useState(false);
-  let pointerEvents = "none";
-  if (screenSelected) {
-    pointerEvents = "all";
-  }
 
   const bounds = useBounds();
   // useEffect(() => {
   //   // Calculate scene bounds
   //   bounds.refresh().clip().fit()
-  // }, [...])
+  // }, [...]
 
   const handleClick = useCallback(() => {
     setScreenSelected((prev) => !prev);
+    console.log("Testin");
     bounds.refresh(ref.current).clip().fit();
-  }, []);
+  }, [bounds]);
 
   const groupPosition = useMemo(
     () => position.clone().add(POS_OFFSET),
@@ -66,8 +65,12 @@ const WebGlSlide = ({
           font={"/public/JetBrains Mono_Regular.json"}
           bevelEnabled
           castShadow
+          position={[6.3, 3.16052429594125, -0.565588082446015]}
+          rotation={[
+            0.40087964175879354, -0.003909933371310533, 0.021517192231723853,
+          ]}
         >
-          {"The WebGL Triangle"}
+          {"WebGL"}
           <meshStandardMaterial side={2} />
         </Text3D>
       </Float>
@@ -75,28 +78,22 @@ const WebGlSlide = ({
       <Float
         floatIntensity={1}
         rotationIntensity={1}
-        position={[-1, -1, 0]}
+        position={[-2.76, 1.29, 0]}
         onClick={handleClick}
+        scale={[3.38, 3.38, 3.38]}
       >
         <Html
-          style={{ userSelect: "none" }}
+          style={{ userSelect: "none", width: "1080px", height: "720px" }}
           castShadow
           receiveShadow
           occlude="blending"
           transform
-          scale={0.3}
-          distanceFactor={10}
-          onClick={handleClick}
+          scale={0.1}
+          distanceFactor={5}
+          // onClick={handleClick}
           position={[1.3, -0.5, 0]}
         >
-          <iframe
-            title="embed"
-            width={640}
-            height={480}
-            src="https://webglworkshop.com/28/01-triangle-webgl2.html"
-            frameBorder={0}
-            style={{ pointerEvents: pointerEvents }}
-          />
+          <Triangle></Triangle>
         </Html>
       </Float>
     </group>

@@ -78,12 +78,14 @@ export function Dolls(props: JSX.IntrinsicElements["group"]) {
           rotation={[0, 1.571, 0]}
           scale={0.094}
           ref={r3fDoll}
+          castShadow
         >
           <mesh
             name="r3fTop"
             geometry={nodes.r3fTop.geometry}
             material={materials.bolshaya}
             position={[-3.253, -5.025, 0]}
+            castShadow
           >
             <mesh
               name="r3fText"
@@ -92,6 +94,7 @@ export function Dolls(props: JSX.IntrinsicElements["group"]) {
               position={[9.559, 27.904, -0.01]}
               rotation={[0, -Math.PI / 2, 0]}
               scale={10.648}
+              castShadow
             />
           </mesh>
         </mesh>
@@ -102,12 +105,14 @@ export function Dolls(props: JSX.IntrinsicElements["group"]) {
           position={[0, 1.06, 0.511]}
           rotation={[0.008, 1.571, 0]}
           scale={0.074}
+          castShadow
         >
           <mesh
             name="threeJsTop"
             geometry={nodes.threeJsTop.geometry}
             material={materials.matryoshka2}
             position={[-3.258, -5.08, 0]}
+            castShadow
           >
             <mesh
               name="threejsText"
@@ -116,6 +121,7 @@ export function Dolls(props: JSX.IntrinsicElements["group"]) {
               position={[10.253, 27.284, 0]}
               rotation={[Math.PI / 2, -0.008, 0]}
               scale={3.891}
+              castShadow
             />
           </mesh>
         </mesh>
@@ -126,6 +132,7 @@ export function Dolls(props: JSX.IntrinsicElements["group"]) {
           position={[0, 0.826, 0.381]}
           rotation={[0, 1.571, 0]}
           scale={0.055}
+          castShadow
         >
           <mesh
             name="webGLText"
@@ -134,6 +141,7 @@ export function Dolls(props: JSX.IntrinsicElements["group"]) {
             position={[6.531, 22.671, 0.001]}
             rotation={[Math.PI / 2, 0, 0]}
             scale={3.626}
+            castShadow
           />
         </mesh>
       </group>
