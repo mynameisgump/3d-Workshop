@@ -19,20 +19,23 @@ import { slideShowIndex } from "./atoms/atoms";
 import { useAtom } from "jotai";
 import DollsSlide from "./slides/DollsSlide";
 import TestControls from "./TestControls";
+import ThreeJsSlide from "./slides/ThreeJsSlide";
 
 const slides = [
   "slide1",
   "slide2",
   "Dolls",
   "WebGlSlide",
+  "ThreeJS",
+  "ReactThreeFiber",
   "Structure of a Scene",
   "Meshes",
-  "Materials",
+  "Geometries/Materials",
   "Lights",
   "Cameras",
-  "Your first Scene",
-  "Shaders",
-  "VR and AR",
+  "Your first Scene (Leads into tutorial)",
+  "Shaders???",
+  "VR and AR???",
 ];
 
 const ThreeApp = () => {
@@ -55,6 +58,11 @@ const ThreeApp = () => {
       if (slide == "WebGlSlide") {
         return (
           <WebGlSlide key={index} index={index} position={initialPosition} />
+        );
+      }
+      if (slide == "ThreeJS") {
+        return (
+          <ThreeJsSlide key={index} index={index} position={initialPosition} />
         );
       } else {
         return (

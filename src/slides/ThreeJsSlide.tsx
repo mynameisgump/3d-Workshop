@@ -1,11 +1,10 @@
-import { Text3D, Float, Html, useBounds } from "@react-three/drei";
+import { Text3D, Float, Html, useBounds, useGLTF } from "@react-three/drei";
 import { useCallback, useMemo, useState } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import { Mesh, Vector3 } from "three";
 import { slideShowIndex } from "../atoms/atoms";
 import { useAtom } from "jotai";
-import Triangle from "../components/triangle";
 
 const POS_OFFSET = new Vector3(-2, 0.7, 0);
 
@@ -14,12 +13,13 @@ type SlideProps = {
   index: number;
 };
 
-const WebGlSlide = ({
+const ThreeJsSlide = ({
   position = new Vector3(0, 0, 0),
   index = 0,
 }: SlideProps) => {
   const groupRef = useRef<Mesh>(null);
   const [slideIndex] = useAtom(slideShowIndex);
+  const { scene } = useGLTF("/threeLogo.glb");
 
   let selected = false;
   if (slideIndex == index) {
@@ -75,33 +75,13 @@ const WebGlSlide = ({
             0.40087964175879354, -0.003909933371310533, 0.021517192231723853,
           ]}
         >
-          {"WebGL"}
+          {"three.js"}
           <meshStandardMaterial side={2} />
         </Text3D>
       </Float>
-
-      <Float
-        floatIntensity={1}
-        rotationIntensity={1}
-        position={[-2.76, 1.29, 0]}
-        onClick={handleClick}
-        scale={[3.38, 3.38, 3.38]}
-      >
-        <Html
-          style={{ userSelect: "none", width: "1080px", height: "720px" }}
-          castShadow
-          receiveShadow
-          occlude="blending"
-          transform
-          scale={0.1}
-          distanceFactor={5}
-          position={[1.3, -0.5, 0]}
-        >
-          {selected && <Triangle></Triangle>}
-        </Html>
-      </Float>
+      <primitive scale={[4, 4, 4]} object={scene}></primitive>
     </group>
   );
 };
 
-export default WebGlSlide;
+export default ThreeJsSlide;
