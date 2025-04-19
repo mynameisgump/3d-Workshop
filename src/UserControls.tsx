@@ -12,6 +12,7 @@ interface PlayerControllerProps {
 const UserControls = ({
   initialRotation = [0, 0, 0],
 }: PlayerControllerProps) => {
+  const mousePostionRef = useRef<THREE.Vector2>(new THREE.Vector2(0, 0));
   const targetMouseRotationRef = useRef<THREE.Vector2>(new THREE.Vector2(0, 0));
 
   const currentMouseRotationRef = useRef<THREE.Vector2>(
@@ -20,6 +21,19 @@ const UserControls = ({
   const initialRotationRef = useRef<THREE.Euler>(
     new THREE.Euler(...initialRotation, "YXZ")
   );
+
+  useEffect(() => {
+    const handleMouseMove = (event: MouseEvent) => {
+      mousePostionRef.current.x = event.clientX / window.innerWidth;
+      mousePostionRef.current.y = event.clientY / window.innerHeight;
+    };
+
+    document.body.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      document.body.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
 
   useEffect(() => {
     initialRotationRef.current.set(
@@ -31,11 +45,10 @@ const UserControls = ({
   }, [initialRotation]);
 
   useFrame((state) => {
-    const mouseX = state.pointer.x;
-    const mouseY = state.pointer.y;
-
-    targetMouseRotationRef.current.x = -mouseX * MOUSE_SENSITIVITY_X;
-    targetMouseRotationRef.current.y = mouseY * MOUSE_SENSITIVITY_Y;
+    targetMouseRotationRef.current.x =
+      -mousePostionRef.current.x * MOUSE_SENSITIVITY_X;
+    targetMouseRotationRef.current.y =
+      mousePostionRef.current.y * MOUSE_SENSITIVITY_Y;
 
     currentMouseRotationRef.current.x = THREE.MathUtils.lerp(
       currentMouseRotationRef.current.x,

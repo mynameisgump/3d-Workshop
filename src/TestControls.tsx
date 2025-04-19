@@ -57,48 +57,20 @@ const TestControls = () => {
     const controls = controlsRef.current;
     if (!controls) return;
 
-    // Calculate the target horizontal angle (azimuth) based on mouse position.
-    // We assume the initial setup faces azimuth 0 (common for camera at +Z looking at origin).
-    // Adjust `centerAzimuth` if your initial setup points elsewhere horizontally.
     const centerAzimuth = 0;
-    // Map pointer.x from [-1, 1] to [-maxHorizontalRotation, +maxHorizontalRotation] relative to center.
-    // Negative sign might be needed depending on desired direction (mouse right -> look right/left?)
-    // If mouse right (pointer.x=1) should make camera look right (positive azimuth), use +
-    // If mouse right should make camera look left (negative azimuth), use -
-    const targetAzimuth = centerAzimuth + pointer.x * maxHorizontalRotation; // Mouse right -> look right
 
-    // Get the current horizontal angle
+    const targetAzimuth = centerAzimuth + pointer.x * maxHorizontalRotation;
+
     const currentAzimuth = controls.azimuthAngle;
 
-    // Calculate the difference needed to reach the target angle
     let deltaAzimuth = targetAzimuth - currentAzimuth;
 
-    // Ensure we rotate via the shortest path (handle wrapping around +/- PI)
     const twoPi = Math.PI * 2;
     deltaAzimuth = (((deltaAzimuth % twoPi) + twoPi * 1.5) % twoPi) - Math.PI;
 
-    // Apply only the horizontal rotation instantly (deltaPolar = 0, enableTransition = false)
     controls.rotate(deltaAzimuth, 0, false);
   });
-  return (
-    <CameraControls
-      ref={controlsRef}
-      // Disable mouse/touch inputs that allow user to drag/orbit/pan/zoom
-      //   mouseButtons={{
-      //     left: ACTION.NONE, // Disable left-click drag
-      //     middle: ACTION.NONE, // Disable middle-click drag/zoom
-      //     right: ACTION.NONE, // Disable right-click drag
-      //     wheel: ACTION.NONE, // Disable scroll wheel zoom
-      //   }}
-      //   touches={{
-      //     one: ACTION.NONE, // Disable one-finger touch drag
-      //     two: ACTION.NONE, // Disable two-finger touch interactions (pinch zoom, etc.)
-      //     three: ACTION.NONE, // Disable three-finger touch drag
-      //   }}
-      // Vertical angle limits are set dynamically in useEffect to lock vertical view
-      // smoothTime={0} // Uncomment for absolutely zero smoothing, though rotate(..., false) is usually sufficient
-    />
-  );
+  return <CameraControls ref={controlsRef} />;
 };
 
 export default TestControls;

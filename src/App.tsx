@@ -6,6 +6,7 @@ import {
   Backdrop,
   OrbitControls,
   CameraControls,
+  Bounds,
 } from "@react-three/drei";
 import UserControls from "./UserControls";
 import Slide1 from "./slides/Slide1";
@@ -96,7 +97,7 @@ const ThreeApp = () => {
 
       <Environment preset="city" />
       {/* <OrbitControls /> */}
-      {slideComponents}
+      <Bounds>{slideComponents}</Bounds>
       <Backdrop
         floor={10}
         segments={20}
