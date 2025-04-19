@@ -20,7 +20,12 @@ const WebGlSlide = ({
 }: SlideProps) => {
   const groupRef = useRef<Mesh>(null);
   const [slideIndex] = useAtom(slideShowIndex);
-  console.log("WebGLSlide", slideIndex, index);
+
+  let selected = false;
+  if (slideIndex == index) {
+    selected = true;
+  }
+
   const [screenSelected, setScreenSelected] = useState(false);
 
   const bounds = useBounds();
@@ -93,7 +98,7 @@ const WebGlSlide = ({
           // onClick={handleClick}
           position={[1.3, -0.5, 0]}
         >
-          <Triangle></Triangle>
+          {selected && <Triangle></Triangle>}
         </Html>
       </Float>
     </group>
