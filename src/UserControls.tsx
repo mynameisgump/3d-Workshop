@@ -24,8 +24,9 @@ const UserControls = ({
 
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
-      mousePostionRef.current.x = event.clientX / window.innerWidth;
-      mousePostionRef.current.y = event.clientY / window.innerHeight;
+      mousePostionRef.current.x = 2 * (event.clientX / window.innerWidth) - 1;
+      mousePostionRef.current.y = 2 * (event.clientY / window.innerHeight) - 1;
+      console.log(mousePostionRef.current);
     };
 
     document.body.addEventListener("mousemove", handleMouseMove);
@@ -48,7 +49,7 @@ const UserControls = ({
     targetMouseRotationRef.current.x =
       -mousePostionRef.current.x * MOUSE_SENSITIVITY_X;
     targetMouseRotationRef.current.y =
-      mousePostionRef.current.y * MOUSE_SENSITIVITY_Y;
+      -mousePostionRef.current.y * MOUSE_SENSITIVITY_Y;
 
     currentMouseRotationRef.current.x = THREE.MathUtils.lerp(
       currentMouseRotationRef.current.x,

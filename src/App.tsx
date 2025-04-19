@@ -108,8 +108,6 @@ const ThreeApp = () => {
         <meshStandardMaterial color="#353540" />
       </Backdrop>
       <UserControls></UserControls>
-      {/* <CameraControls></CameraControls> */}
-      {/* <TestControls></TestControls> */}
     </>
   );
 };
