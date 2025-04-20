@@ -5,13 +5,14 @@ Command: npx gltfjsx@6.5.3 CodeScreens.glb -k -t
 
 import * as THREE from "three";
 import React, { useRef, useEffect } from "react";
-import { useGLTF } from "@react-three/drei";
+import { useGLTF, Html } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 import { useFrame } from "@react-three/fiber";
 import { useAtom } from "jotai";
 import { codeScreenActive } from "../atoms/atoms";
 import gsap from "gsap";
 import { degToRad } from "three/src/math/MathUtils.js";
+import Triangle from "../components/triangle";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -63,7 +64,22 @@ const CodeScreens = (props: JSX.IntrinsicElements["group"]) => {
           position={[18.733, -1.97, -1.819]}
           rotation={[-Math.PI / 2, 0, 0]}
           scale={[15.762, 15.762, 0.841]}
-        />
+        >
+          <Html
+            style={{ userSelect: "none", width: "1080px", height: "1080px" }}
+            castShadow
+            receiveShadow
+            occlude="blending"
+            transform
+            scale={0.13}
+            distanceFactor={5}
+            position={[-0.05, 0.1, 0]}
+            rotation={[degToRad(90), degToRad(180), 0]}
+          >
+            {<Triangle></Triangle>}
+          </Html>
+        </mesh>
+
         <mesh
           name="Plane001"
           geometry={nodes.Plane001.geometry}
@@ -71,7 +87,21 @@ const CodeScreens = (props: JSX.IntrinsicElements["group"]) => {
           position={[-18.733, -1.97, -1.819]}
           rotation={[-Math.PI / 2, 0, 0]}
           scale={[15.762, 15.762, 0.841]}
-        />
+        >
+          <Html
+            style={{ userSelect: "none", width: "1080px", height: "1080px" }}
+            castShadow
+            receiveShadow
+            occlude="blending"
+            transform
+            scale={0.13}
+            distanceFactor={5}
+            position={[0.05, 0.1, 0]}
+            rotation={[degToRad(90), degToRad(180), 0]}
+          >
+            {<Triangle></Triangle>}
+          </Html>
+        </mesh>
       </mesh>
     </group>
   );

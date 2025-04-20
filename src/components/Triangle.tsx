@@ -112,7 +112,7 @@ const Triangle = () => {
       </div>
 
       <canvas
-        style={{ width: "1080px", height: "720px" }}
+        style={{ width: "1080px", height: "1080px" }}
         ref={canvasRef}
         // style={{ display: " }}
       />
