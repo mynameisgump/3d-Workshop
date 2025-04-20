@@ -74,7 +74,7 @@ const UserControls = ({
   });
 
   return (
-    <PerspectiveCamera position={[0, 0, 5]}>
+    <PerspectiveCamera position={[0, 0, 5.4]}>
       <CodeScreens
         position={[0, 2, -2]}
         rotation={[0, 0, degToRad(180)]}
