@@ -1,6 +1,9 @@
 import { useRef, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
+import { PerspectiveCamera } from "@react-three/drei";
+import CodeScreens from "./models/CodeScreens";
+import { degToRad } from "three/src/math/MathUtils.js";
 
 const MOUSE_SENSITIVITY_X = 0.1;
 const MOUSE_SENSITIVITY_Y = 0.08;
@@ -70,7 +73,14 @@ const UserControls = ({
     camera.rotateX(currentMouseRotationRef.current.y);
   });
 
-  return <></>;
+  return (
+    <PerspectiveCamera position={[0, 0, 5]}>
+      <CodeScreens
+        position={[0, 2, -2]}
+        rotation={[0, 0, degToRad(180)]}
+      ></CodeScreens>
+    </PerspectiveCamera>
+  );
 };
 
 export default UserControls;

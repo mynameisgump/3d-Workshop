@@ -1,5 +1,5 @@
 import { atom } from "jotai";
 
 const slideShowIndex = atom<number>(0);
-
-export { slideShowIndex };
+const codeScreenActive = atom<boolean>(false);
+export { slideShowIndex, codeScreenActive };

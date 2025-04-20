@@ -127,7 +127,7 @@ function App() {
   };
 
   return (
-    <Canvas shadows camera={{ position: [0, 0, 5] }}>
+    <Canvas shadows>
       <ThreeApp />
     </Canvas>
   );
