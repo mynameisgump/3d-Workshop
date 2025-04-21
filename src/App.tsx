@@ -1,5 +1,5 @@
 import { Canvas } from "@react-three/fiber";
-import { Vector3 } from "three";
+import { Scene, Vector3 } from "three";
 import { useState, useEffect, useMemo, useRef } from "react";
 import {
   Environment,
@@ -20,15 +20,14 @@ import { useAtom } from "jotai";
 import DollsSlide from "./slides/DollsSlide";
 import TestControls from "./TestControls";
 import ThreeJsSlide from "./slides/ThreeJsSlide";
+import Lights from "./Lights";
+import SceneSlide from "./slides/SceneSlide";
 
 const slides = [
   "slide1",
   "slide2",
   "Dolls",
-  "WebGlSlide",
-  "ThreeJS",
-  "ReactThreeFiber",
-  "Structure of a Scene",
+  "SceneSlide",
   "Meshes",
   "Geometries/Materials",
   "Lights",
@@ -64,6 +63,11 @@ const ThreeApp = () => {
         return (
           <ThreeJsSlide key={index} index={index} position={initialPosition} />
         );
+      }
+      if (slide == "SceneSlide") {
+        return (
+          <SceneSlide key={index} index={index} position={initialPosition} />
+        );
       } else {
         return (
           <TextSlide
@@ -95,15 +99,8 @@ const ThreeApp = () => {
 
   return (
     <>
-      <ambientLight intensity={Math.PI / 2} />
-      <directionalLight
-        position={[0, 10, 0]}
-        intensity={1}
-        castShadow
-        shadow-mapSize={[1024, 1024]}
-      />
+      <Lights />
 
-      <Environment preset="city" />
       {/* <OrbitControls /> */}
       <Bounds>{slideComponents}</Bounds>
       <Backdrop
