@@ -22,13 +22,14 @@ import TestControls from "./TestControls";
 import ThreeJsSlide from "./slides/ThreeJsSlide";
 import Lights from "./Lights";
 import SceneSlide from "./slides/SceneSlide";
+import MeshSlide from "./slides/MeshSlide";
 
 const slides = [
   "slide1",
   "slide2",
   "Dolls",
   "SceneSlide",
-  "Meshes",
+  "MeshSlide",
   "Geometries/Materials",
   "Lights",
   "Cameras",
@@ -67,6 +68,11 @@ const ThreeApp = () => {
       if (slide == "SceneSlide") {
         return (
           <SceneSlide key={index} index={index} position={initialPosition} />
+        );
+      }
+      if (slide == "MeshSlide") {
+        return (
+          <MeshSlide key={index} index={index} position={initialPosition} />
         );
       } else {
         return (
