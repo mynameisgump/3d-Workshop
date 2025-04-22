@@ -262,7 +262,7 @@ const LightsSlide = ({
             />
           </mesh>
           <mesh
-            position={[1.12, -1.22, 0]}
+            position={[1.12, -1.18, 0]}
             castShadow
             receiveShadow
             rotation={[0, -0.349065850398866, 0]}
