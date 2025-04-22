@@ -16,7 +16,10 @@ const planets: PlanetConfig[] = [
   { radius: 0.4, distance: 7, speed: 0.45, color: "#ffaaaa" },
 ];
 
-export const SolarSystem = () => {
+type SolarSystemProps = {
+  position?: [number, number, number];
+};
+export const SolarSystem = ({ position }: SolarSystemProps) => {
   const groupRef = useRef<Group>(null!);
   const outerGroupRef = useRef<Group>(null!);
   const planetRefs = useRef<(Mesh | null)[]>([]);
@@ -39,7 +42,7 @@ export const SolarSystem = () => {
   });
 
   return (
-    <group ref={outerGroupRef}>
+    <group ref={outerGroupRef} position={position}>
       <group
         scale={[0.3, 0.3, 0.3]}
         rotation={[degToRad(45), 0, 0]}
@@ -49,6 +52,7 @@ export const SolarSystem = () => {
         <mesh>
           <sphereGeometry args={[1, 32, 32]} />
           <meshStandardMaterial emissive={"#ffffaa"} color={"#ffaa00"} />
+          <pointLight intensity={100}></pointLight>
         </mesh>
 
         {/* Planets */}

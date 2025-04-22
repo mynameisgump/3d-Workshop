@@ -200,8 +200,6 @@ const LightsSlide = ({
           </Text3D>
         </Float>
 
-        {/* Point Light - visible when mode is 1 */}
-
         <group ref={lightsRef} visible={slideIndex === index}>
           {lightMode === 1 && (
             <pointLight
@@ -216,7 +214,6 @@ const LightsSlide = ({
             />
           )}
 
-          {/* Spot Light - visible when mode is 2 */}
           {lightMode === 2 && (
             <spotLight
               ref={spotLightRef}
@@ -232,7 +229,6 @@ const LightsSlide = ({
             />
           )}
 
-          {/* Directional Light - visible when mode is 3 */}
           {lightMode === 3 && (
             <directionalLight
               ref={directionalLightRef}
@@ -246,7 +242,6 @@ const LightsSlide = ({
           )}
         </group>
 
-        {/* Add a cube to visualize the lighting effect */}
         <group position={[1, 0, 0]}>
           <mesh
             position={[0.53, -2.18, 0]}

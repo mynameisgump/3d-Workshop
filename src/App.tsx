@@ -25,6 +25,7 @@ import SceneSlide from "./slides/SceneSlide";
 import MeshSlide from "./slides/MeshSlide";
 import LightsSlide from "./slides/LightsSlide";
 import CameraSlide from "./slides/CameraSlide";
+import TutorialSlide from "./slides/TutorialSlide";
 
 const slides = [
   "slide1",
@@ -34,9 +35,9 @@ const slides = [
   "MeshSlide",
   "LightsSlide",
   "Cameras",
-  "Your first Scene (Leads into tutorial)",
-  "Shaders???",
-  "VR and AR???",
+  "Tutorial",
+  // "Shaders???",
+  // "VR and AR???",
 ];
 
 const ThreeApp = () => {
@@ -84,6 +85,11 @@ const ThreeApp = () => {
       if (slide == "Cameras") {
         return (
           <CameraSlide key={index} index={index} position={initialPosition} />
+        );
+      }
+      if (slide == "Tutorial") {
+        return (
+          <TutorialSlide key={index} index={index} position={initialPosition} />
         );
       } else {
         return (
