@@ -33,9 +33,19 @@ const LightsSlide = ({
 
   const [slideIndex] = useAtom(slideShowIndex);
   const [lightMode, setLightMode] = useState(2); // Default to spotlight (2)
+
+  const lightsRef = useRef<Mesh>(null);
+  useEffect(() => {
+    if (slideIndex === index) {
+      lightsRef.current?.scale.set(1, 1, 1);
+    } else {
+      lightsRef.current?.scale.set(0, 0, 0);
+    }
+  }, [slideIndex, index]);
+
   let spotLightHelperScale = 0;
   if (lightMode === 2) {
-    spotLightHelperScale = 3;
+    spotLightHelperScale = 1;
   }
   useHelper(spotLightRef, SpotLightHelper, spotLightHelperScale);
 
@@ -191,47 +201,50 @@ const LightsSlide = ({
         </Float>
 
         {/* Point Light - visible when mode is 1 */}
-        {lightMode === 1 && (
-          <pointLight
-            ref={pointLightRef}
-            position={[0, 0, 3]}
-            intensity={500}
-            distance={50}
-            castShadow
-            shadow-mapSize-width={1024}
-            shadow-mapSize-height={1024}
-            color="#ff9900"
-          />
-        )}
 
-        {/* Spot Light - visible when mode is 2 */}
-        {lightMode === 2 && (
-          <spotLight
-            ref={spotLightRef}
-            position={[1.98, -1.31, 3]}
-            angle={Math.PI / 8}
-            penumbra={1}
-            intensity={1000}
-            distance={100}
-            castShadow
-            shadow-mapSize-width={1024}
-            shadow-mapSize-height={1024}
-            color="#ffffff"
-          />
-        )}
+        <group ref={lightsRef} visible={slideIndex === index}>
+          {lightMode === 1 && (
+            <pointLight
+              ref={pointLightRef}
+              position={[0, 0, 3]}
+              intensity={500}
+              distance={50}
+              castShadow
+              shadow-mapSize-width={1024}
+              shadow-mapSize-height={1024}
+              color="#ff9900"
+            />
+          )}
 
-        {/* Directional Light - visible when mode is 3 */}
-        {lightMode === 3 && (
-          <directionalLight
-            ref={directionalLightRef}
-            position={[0, 0, 0]}
-            intensity={2}
-            castShadow
-            shadow-mapSize-width={1024}
-            shadow-mapSize-height={1024}
-            color="#4466ff"
-          />
-        )}
+          {/* Spot Light - visible when mode is 2 */}
+          {lightMode === 2 && (
+            <spotLight
+              ref={spotLightRef}
+              position={[1.98, -1.31, 3]}
+              angle={Math.PI / 8}
+              penumbra={1}
+              intensity={1000}
+              distance={100}
+              castShadow
+              shadow-mapSize-width={1024}
+              shadow-mapSize-height={1024}
+              color="#ffffff"
+            />
+          )}
+
+          {/* Directional Light - visible when mode is 3 */}
+          {lightMode === 3 && (
+            <directionalLight
+              ref={directionalLightRef}
+              position={[0, 0, 0]}
+              intensity={2}
+              castShadow
+              shadow-mapSize-width={1024}
+              shadow-mapSize-height={1024}
+              color="#4466ff"
+            />
+          )}
+        </group>
 
         {/* Add a cube to visualize the lighting effect */}
         <group position={[1, 0, 0]}>

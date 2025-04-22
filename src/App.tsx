@@ -24,6 +24,7 @@ import Lights from "./Lights";
 import SceneSlide from "./slides/SceneSlide";
 import MeshSlide from "./slides/MeshSlide";
 import LightsSlide from "./slides/LightsSlide";
+import CameraSlide from "./slides/CameraSlide";
 
 const slides = [
   "slide1",
@@ -78,6 +79,11 @@ const ThreeApp = () => {
       if (slide == "LightsSlide") {
         return (
           <LightsSlide key={index} index={index} position={initialPosition} />
+        );
+      }
+      if (slide == "Cameras") {
+        return (
+          <CameraSlide key={index} index={index} position={initialPosition} />
         );
       } else {
         return (

@@ -11,6 +11,8 @@ import CameraControlsImpl from "camera-controls";
 import * as THREE from "three";
 import gsap from "gsap";
 import { OrbitControls } from "@react-three/drei";
+import { useAtom } from "jotai";
+import { currentCamera } from "./atoms/atoms";
 
 // --- Constants ---
 const TRANSITION_DURATION_S = 1.0; // Duration in seconds for GSAP
@@ -83,7 +85,8 @@ const SmoothViewSwitcher = forwardRef<
 >(({ initialMode = "perspective", ...restProps }, ref) => {
   const controlsRef = useRef<CameraControlsImpl>(null!);
   const gsapTweenRef = useRef<gsap.core.Tween | null>(null);
-  const [mode, setMode] = useState<"perspective" | "orthographic">(initialMode);
+  // const [mode, setMode] = useState<"perspective" | "orthographic">(initialMode);
+  const [mode, setMode] = useAtom(currentCamera);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   // Refs for perspective mouse look
