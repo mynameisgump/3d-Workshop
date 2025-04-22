@@ -10,6 +10,13 @@ import frag from "../Shaders/psx.frag?raw";
 import vert from "../Shaders/psx.vert?raw";
 import { color } from "three/tsl";
 
+interface Client {
+  name: string;
+  age: number;
+}
+
+const test = { name: "Ethan", age: 25 } as Client;
+
 const shaderUniforms = {
   time: 0,
   color: new Color(0.2, 0.0, 0.1),
