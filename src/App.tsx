@@ -129,11 +129,6 @@ const ThreeApp = () => {
 };
 
 function App() {
-  const handleMouseMove = (event: MouseEvent) => {
-    const mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-    const mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
-  };
-
   return (
     <Canvas shadows>
       <ThreeApp />

@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { Mesh, Vector3 } from "three";
 import { slideShowIndex } from "../atoms/atoms";
 import { useAtom } from "jotai";
+import SolarSystem from "../components/SolarSystem";
 
 const POS_OFFSET = new Vector3(-2, 0.7, 0);
 
@@ -52,6 +53,7 @@ const TextSlide = ({ position, index, text }: SlideProps) => {
           <meshStandardMaterial side={2} />
         </Text3D>
       </Float>
+      {/* <SolarSystem></SolarSystem> */}
     </group>
   );
 };
